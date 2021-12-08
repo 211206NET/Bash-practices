@@ -1,55 +1,24 @@
+
 #!/usr/bin/bash
+randomNum=$[($RANDOM % 100) +1]
+guesses=1
+echo -randomNum "I'm thinking of a number between 1 and 100. Your guess:"
 
-randomNum=$(($RANDOM % 100))
+read randomNum
+while read n2; do
 
-echo "Guess what number from 1 to 100 that im thinking about?"
-read UserGuess
-counter=1
-
-#add loops that let them know hwether they are closer or fartherfrom the answer
-while [ $UserGuess != $randomNum ]
-do
-    while [ $randomNum -gt 100 ] || [ $randomNum -lt 0 ]
-    do 
-        read $randomNum
-        echo "That is completely out of range. Pick between 0 and 100."
-    done
-    if [ $diff -lt 0 ]
-    then
-        diff=$(($diff*-1))
-    fi
-
-    if [ $diff == 0 ]
-    then
-        break
-    elif [ $diff -lt 3 ]
-    then
-        echo "you are getting very close to it."
-    elif [ $diff -lt 10 ]
-    then
-        echo "You're getting there."
-    elif [ $diff -gt 20 ]
-    then
-        echo "You're starting to get colder and colder."
-    fi
-
-    counter=$(($counter=+1))
-    if [ $UserGuess -lt $randomNum ]
-    then
-        echo "you're off, go a little higher."
-    else
-        echo "its higher than what you have guessed."
-    fi
-
-    read UserGuess
-done
-
-Guesscounter="Guesses"
-if [ $counter != 1 ]
-then
-    GuessCounter="Guesses"
+if   [[ $UserGuess -eq $randomNum ]]; then
+break;  
+else
+echo    
+if [[ $UserGuess -gt $randomNum ]]; then 
+echo -n "Sorry, your guess is too high. New guess:"
+elif [[ $UserGuess -lt $randomNum ]]; then
+echo -n "Sorry, your guess is too low. New guess:"
+fi      
 fi
-
-echo "You finally got the right number, $randomNum. Cheers all around."
-echo "It only took you $counter $Guesscounter!"
+guesses=$((guesses+1))
+done
+echo
+echo "Good job! It took you $guesses guesses to get the right number."
 
