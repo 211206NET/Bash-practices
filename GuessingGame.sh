@@ -5,7 +5,7 @@ guesses=1
 echo -randomNum "I'm thinking of a number between 1 and 100. Your guess:"
 
 read randomNum
-while read n2; do
+while read UserGuess; do
 
 if   [[ $UserGuess -eq $randomNum ]]; then
 break;  
